@@ -1,0 +1,15 @@
+name: 'git credential approve'
+description: 'with action approve, git-credential will send the description to any configured credential helpers, which may store the credential for later use.'
+inputs:
+  url:
+    default: 'https://github.com'
+  path:
+    required: true
+  personal-access-token:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo "url=${{ inputs.url }}"$'\n'"path=${{ inputs.path }}"$'\n'"username=unused"$'\n'"password=${{ inputs.personal-access-token }}"$'\n' | git credential approve
+      shell: bash
+      name: 'git credential approve'
